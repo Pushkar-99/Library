@@ -21,6 +21,7 @@ const storage = multer.diskStorage({
   }
 });
 
+
 const fileFilter = (req, file, cb) => {
   //Reject a file
   if(file.mimetype === 'image/jpeg' || file.mimetype  === 'image/jpg' || file.mimetype === 'image/png'){
@@ -41,7 +42,6 @@ const upload = multer({
 
 
 //GET request
-//ROUTE: /post/getPosts
 router.get('/getPost/:bookname', async (req, res) => {
 	const variable = req.params.bookname;
 	
@@ -53,6 +53,7 @@ router.get('/getPost/:bookname', async (req, res) => {
     	res.send('No data found');
     }
 });
+
 
 
 //New request to create post
@@ -68,7 +69,6 @@ router.post('/createPost',upload.single('image'), async(req,res) => {
   if(req.file) formfield.image = str + req.file.path.replace(/\\/g,"/");
 
 const data = await new Post(formfield).save();
-
 if(data){
 res.send(data);
 }
@@ -76,6 +76,9 @@ else{
 	res.send('Error');
 }
 });
+
+
+
 
 //Request to update post
 router.post('/editPost',upload.single('image'), async(req,res) => {
@@ -93,6 +96,9 @@ router.post('/editPost',upload.single('image'), async(req,res) => {
           .catch(err => res.json(err));
   
 });
+
+
+
 
 //Request to delete post
 router.delete('/deletePost/:postid', (req,res) => {
