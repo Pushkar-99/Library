@@ -78,14 +78,15 @@ else{
 });
 
 //Request to update post
-router.post('/editPost', async(req,res) => {
+router.post('/editPost',upload.single('image'), async(req,res) => {
   let editFields = {};
   if(req.body.bookname)
    editFields.bookname = req.body.bookname;
   if(req.body.description)
    editFields.description = req.body.description;
-  if(req.body.image)
-   editFields.image = req.body.image;
+ 
+ var str = 'http://localhost:3002/';
+  if(req.file) editFields.image = str + req.file.path.replace(/\\/g,"/");
 
   Post.findOneAndUpdate({ _id: req.body.postid }, { $set: editFields})
           .then(updatedPost => res.send(updatedPost))
