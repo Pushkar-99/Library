@@ -7,7 +7,6 @@ const router = express.Router();
 
 
 
-//Application variable
 const PORT = 3002;
 const app = express();
 const server = app.listen(PORT, (err) =>
@@ -49,7 +48,6 @@ const postsroute = require('./routes/postsroute');
 
 
 //Using the routes
-//app.use('/',express.static('uploads'));
 app.use('/postsroute', postsroute);
 
 
