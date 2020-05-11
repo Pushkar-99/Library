@@ -93,7 +93,6 @@ router.post('/editPost',upload.single('image'), async(req,res) => {
   Post.findOneAndUpdate({ _id: req.body.postid }, { $set: editFields})
           .then(updatedPost => res.send(updatedPost))
           .catch(err => res.json(err));
-  
 });
 
 
